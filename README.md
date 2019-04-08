@@ -193,7 +193,7 @@ Kebanyakan fungsi-fungsi yang tersedia adalah **opsional**, kita tidak perlu men
 - Fungsi ```readdir``` yang dipanggil saat user mencoba untuk menampilkan file dan direktori yang berada pada suatu direktori yang spesifik.
 - Fungsi ```read``` yang dipanggil saat sistem mencoba untuk membaca potongan demi potongan data dari suatu file.
 
-Untuk contoh mari kita implementasikan FUSE sederhana yang hanya menggunakan getattr, readdir dan read silahkan coba code yang ada dibawah ini:
+Contoh program FUSE sederhanaa yang hanya menggunakan 3 fungsi tersebut.
 ```c
 #define FUSE_USE_VERSION 28
 #include <fuse.h>
@@ -275,20 +275,20 @@ int main(int argc, char *argv[])
 
 ```
 
-Setelah itu simpan kode dengan nama file cobafuse.c lalu compile dengan cara:
+Setelah itu kode dapat di-_compile_ dengan cara
 
 ```
-gcc -Wall `pkg-config fuse --cflags` cobafuse.c -o cobafuse `pkg-config fuse --libs`
+gcc -Wall `pkg-config fuse --cflags` [file.c] -o [output] `pkg-config fuse --libs`
 ```
 
-Lalu buatlah sebuah folder untuk tujuan pembuatan FUSE. misal buat sebuah folder dengan nama ```test``` lalu menjalankan fusenya pada folder ```test``` tersebut.
+Lalu buat sebuah direktori sebagai tujuan pembuatan FUSE dan menjalankan FUSE pada direktori tersebut.
 ```
-$ mkdir test
-$ ./cobafuse test
+$ mkdir [direktori tujuan]
+$ ./[output] [direktori tujuan]
 ```
-Setelah program dijalankan, masuklah kedalam folder tujuan tersebut. maka isinya adalah list folder yang sama seperti yang ada didalam ```root``` atau ```/```
+Setelah program dijalankan, masuklah kedalam direktori tujuan tersebut. Isi dari direktori tersebut adalah list folder yang sama seperti yang ada di dalam ```root``` atau ```/```
 
-Sesuai dengan penjelasan di awal bab FUSE, dimana FUSE dapat memodifikasi file sistem di userspace tanpa perlu mengubah kode yang ada pada kernel. nah, Di sini kita coba memodifikasi kode FUSE tadi agar FUSE tersebut menampilkan apa yang ada di dalam folder ```/home/administrator/Documents```.
+Sesuai dengan penjelasan di awal di mana FUSE dapat memodifikasi _file system_ di _user space_ tanpa perlu mengubah kode yang ada pada kernel, di sini kita coba memodifikasi kode FUSE tadi agar FUSE tersebut menampilkan apa yang ada di dalam folder ```/home/[user]/Documents```.
 Ubah kode FUSE tadi seperti yang ada dibawah ini:
 
 ```c
@@ -302,7 +302,7 @@ Ubah kode FUSE tadi seperti yang ada dibawah ini:
 #include <errno.h>
 #include <sys/time.h>
 
-static const char *dirpath = "/home/administrator/Documents";
+static const char *dirpath = "/home/[user]/Documents";
 
 static int xmp_getattr(const char *path, struct stat *stbuf)
 {
