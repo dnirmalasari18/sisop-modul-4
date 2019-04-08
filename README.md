@@ -188,9 +188,10 @@ Selain itu, atribut pada ```struct``` tersebut tertulis seperti fungsi yang bias
 
 **Untuk mengimplementasikan FUSE**, kita harus menggunakan ```struct``` ini dan harus mendefinisikan fungsi yang ada didalam ```struct``` tersebut. Setelahnya, kital mengisi ```struct``` tersebut dengan pointer dari fungsi yang ingin diimplementasikan. 
 
-Kebanyakan fungsi-fungsi yang tersedia adalah **opsional**, kita tidak perlu mengimplementasikan semuanya. Beberapa fungsi memang harus diimplementasikan dalam file sistem. Fungsi-fungsi tersebut adalah ```getattr```, ```readdir``` dan ```read```.
-
-Fungsi getattr akan dipanggil saat sistem mencoba untuk mendapatkan atribut dari sebuah file, Fungsi readdir akan dipanggil saat user mencoba untuk menampilkan file dan direktori yang berada pada suatu direktori yang spesifik, sedangkan funsi read seperti yang kita baca dari namanya funsi read akan dipanggil saat sistem mencoba untuk membaca potongan demi potongan data dari suatu file.
+Kebanyakan fungsi-fungsi yang tersedia adalah **opsional**, kita tidak perlu mengimplementasikan semuanya. Beberapa fungsi memang harus diimplementasikan dalam _file system_. Fungsi-fungsi tersebut antara lain:
+- Fungsi ```getattr``` dipanggil saat sistem mencoba untuk mendapatkan atribut dari sebuah file.
+- Fungsi ```readdir``` dipanggil saat user mencoba untuk menampilkan file dan direktori yang berada pada suatu direktori yang spesifik.
+- Fungsi ```read``` seperti yang kita baca dari namanya, fungsi ini dipanggil saat sistem mencoba untuk membaca potongan demi potongan data dari suatu file.
 
 Untuk contoh mari kita implementasikan FUSE sederhana yang hanya menggunakan getattr, readdir dan read silahkan coba code yang ada dibawah ini:
 ```c
