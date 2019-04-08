@@ -184,9 +184,11 @@ static struct fuse_operations xmp_oper = {
 ```
 Dapat dilihat bahwa semua atribut pada ```struct``` tersebut adalah pointer yang menuju ke fungsi. Setiap fungsi tersebut disebut FUSE saat suatu kejadian yang spesifik terjadi di *filesystem*. Sebagai contoh saat user menulis di sebuah file, sebuah fungsi yang ditunjuk oleh atribut "write" di ```struct``` akan terpanggil.
 
-Jika kita perhatikan atribut pada ```struct``` tersebut maka kita akan menyadari bahwa atribut yang tertulis di sana adalah sebuah fungsi yang biasa digunakan di linux. sebagai contoh saat kita membuat *directory* di FUSE maka fungsi mkdir akan dipanggil begitu juga fungsi-fungsi lainnya.
+Selain itu, atribut pada ```struct``` tersebut tertulis seperti fungsi yang biasa digunakan di linux. Contohnya ialah saaat kita membuat _directory_ di FUSE maka fungsi mkdir akan dipanggil.
 
-Untuk mengimplementasikan FUSE kita harus menggunakan ```struct``` ini dan harus mendefinisikan fungsi yang ada didalam ```struct``` lalu mengisi ```struct``` tersebut dengan pointer dari fungsi yang ingin diimplementasikan. Kebanyakan fungsi yang tersedia adalah opsional, kita tidak perlu mengimplementasikan semuanya, meskipun ada beberapa adalah sesuatu yang penting dari sebuah file sistem yang fungsional (contoh: ```getattr```). Beberapa fungsi memang harus diimplementasikan dalam file sistem. Fungsi-fungsi tersebut adalah ```getattr```, ```readdir``` dan ```read```.
+**Untuk mengimplementasikan FUSE**, kita harus menggunakan ```struct``` ini dan harus mendefinisikan fungsi yang ada didalam ```struct``` tersebut. Setelahnya, kital mengisi ```struct``` tersebut dengan pointer dari fungsi yang ingin diimplementasikan. 
+
+Kebanyakan fungsi-fungsi yang tersedia adalah **opsional**, kita tidak perlu mengimplementasikan semuanya. Beberapa fungsi memang harus diimplementasikan dalam file sistem. Fungsi-fungsi tersebut adalah ```getattr```, ```readdir``` dan ```read```.
 
 Fungsi getattr akan dipanggil saat sistem mencoba untuk mendapatkan atribut dari sebuah file, Fungsi readdir akan dipanggil saat user mencoba untuk menampilkan file dan direktori yang berada pada suatu direktori yang spesifik, sedangkan funsi read seperti yang kita baca dari namanya funsi read akan dipanggil saat sistem mencoba untuk membaca potongan demi potongan data dari suatu file.
 
