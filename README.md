@@ -49,7 +49,7 @@ _File system_ untuk tujuan khusus adalah _file system_ yang tidak termasuk _disk
 _File system_ yang mencatat perubahan ke dalam jurnal (biasanya berupa log sirkular dalam area tertentu) sebelum melakukan perubahan ke _file system_. File sistem seperti ini memiliki kemungkinan yang lebih kecil mengalami kerusakan saat terjadi _power failure_ atau _system crash_.
 
 ### 1.2 Virtual File System
-**Virtual file system** adalah suatu lapisan perangkat lunak dalam kernel yang menyediakan _interface file system_ untuk program _user space_. _Virtual file system_ berfungsi agar berbagai jenis _file system_ dapat diakses oleh aplikasi komputer dengan cara yang seragam. VFS menyediakan antarmuka antara _system call_ dengan sistem yang sesungguhnya.
+Virtual file system adalah suatu lapisan perangkat lunak dalam kernel yang menyediakan _interface file system_ untuk program _user space_. _Virtual file system_ berfungsi agar berbagai jenis _file system_ dapat diakses oleh aplikasi komputer dengan cara yang seragam. VFS menyediakan antarmuka antara _system call_ dengan sistem yang sesungguhnya.
 
 ### 1.3 Dentry
 Dentry atau _Directory Entry_ merupakan sebuah struktur data yang memiliki tugas sebagai penerjemah nama berkas ke inode-nya. Contoh informasi yang disimpan dalam dentry adalah _name_, _pointer to inode_, _pointer to parent dentry_, _use count_, dan lainnya. Adapula command dalam VFS dentry adalah D_compare, D_delete, D_release.
@@ -79,7 +79,7 @@ Inode adalah abstraksi VFS untuk berkas. Setiap berkas, _directory_, dan data la
 # 2. File System in Userspace (FUSE)
 FUSE (Filesystem in Userspace) adalah sebuah _interface_ dimana kita dapat membuat _file system_ linux sendiri pada _user space_.
 
-Keuntungan besar menggunakan FUSE ialah, kita dapat menggunakan _library_ apapun yang tersedia untuk membuat _file system_ sendiri tanpa perlu mengganti kode pada kernel tanpa perlu mengenali secara mendalam apa yang _file system_ sebenarnya lakukan di _kernel space_. Hal ini dilakukan karenanya modul fuse yang dapat menjembatani antara akode _file system_ yang berada pada _user space_ dengan _file system_ yang berada pada _kernel space_
+Keuntungan menggunakan FUSE ialah, kita dapat menggunakan _library_ apapun yang tersedia untuk membuat _file system_ sendiri tanpa perlu mengganti kode pada kernel tanpa perlu mengenali secara mendalam apa yang _file system_ sebenarnya lakukan di _kernel space_. Hal ini dilakukan karenanya modul fuse yang dapat menjembatani antara akode _file system_ yang berada pada _user space_ dengan _file system_ yang berada pada _kernel space_
 
 Salah satu contoh yang menarik dari fuse adalah [GDFS][7bb7b7cc] (Google Drive File System) dimana GDFS ini memungkinkan kita untuk menunggangkan (mount) Google Drive kita ke sistem linux dan menggunakannya seperti file linux biasa.
 
@@ -88,6 +88,7 @@ Salah satu contoh yang menarik dari fuse adalah [GDFS][7bb7b7cc] (Google Drive F
 Untuk mengimplementasikan FUSE ini, kita harus membuat sebuah program yang terhubung dengan *library* ```libfuse```. Tujuan dari program yang dibuat ini adalah menspesifikkan bagaimana *file system* merespon *read/write/stat* dari sebuah *request*. Program ini juga digunakan untuk menautkan *(mount)* *file system* asli *(kernelspace)* ke *filesystem* yang baru *(userspace)*. Jadi di saat *user* berurusan dengan *read/write/stat request* di *filesystem (userspace)*, kernel akan meneruskan *input output request* tersebut ke program FUSE dan program tersebut akan merespon kembali ke *user*.
 
 Untuk lebih jelasnya mari kita coba membuat program FUSE.
+
 ##### Instalasi FUSE
 Pertama-tama kita harus memstikan bahwa FUSE sudah ter-install di perangkat anda
 ```
