@@ -25,7 +25,7 @@ _File system disk_ adalah _file system_ yang didesain untuk menyimpan data pada 
 
 **2. File System Flash**
 
-_File system flash_ adalah _file system+ yang didesain untuk menyimpan data pada media _flash memory_. Hal ini menjadi lazim ketika jumlah perangkat mobile semakin banyak dan kapasitas _memory flash_ yang semakin besar.
+_File system flash_ adalah _file system_ yang didesain untuk menyimpan data pada media _flash memory_. Hal ini menjadi lazim ketika jumlah perangkat mobile semakin banyak dan kapasitas _memory flash_ yang semakin besar.
 
 **3. File System Database**
 
@@ -175,7 +175,7 @@ static struct fuse_operations xmp_oper = {
 	.create         = xmp_create,
 	.release	= xmp_release,
 	.fsync		= xmp_fsync,
-  .setxattr	= xmp_setxattr,
+  	.setxattr	= xmp_setxattr,
 	.getxattr	= xmp_getxattr,
 	.listxattr	= xmp_listxattr,
 	.removexattr	= xmp_removexattr,
@@ -184,9 +184,9 @@ static struct fuse_operations xmp_oper = {
 ```
 Dapat dilihat bahwa semua atribut pada ```struct``` tersebut adalah pointer yang menuju ke fungsi. Setiap fungsi tersebut disebut FUSE saat suatu kejadian yang spesifik terjadi di *filesystem*. Sebagai contoh saat user menulis di sebuah file, sebuah fungsi yang ditunjuk oleh atribut "write" di ```struct``` akan terpanggil.
 
-Selain itu, atribut pada ```struct``` tersebut tertulis seperti fungsi yang biasa digunakan di linux. Contohnya ialah saaat kita membuat _directory_ di FUSE maka fungsi mkdir akan dipanggil.
+Selain itu, atribut pada ```struct``` tersebut tertulis seperti fungsi yang biasa digunakan di linux. Contohnya ialah saat kita membuat _directory_ di FUSE maka fungsi mkdir akan dipanggil.
 
-**Untuk mengimplementasikan FUSE**, kita harus menggunakan ```struct``` ini dan harus mendefinisikan fungsi yang ada didalam ```struct``` tersebut. Setelahnya, kital mengisi ```struct``` tersebut dengan pointer dari fungsi yang ingin diimplementasikan. 
+**Untuk mengimplementasikan FUSE**, kita harus menggunakan ```struct``` ini dan harus mendefinisikan fungsi yang ada di dalam ```struct``` tersebut. Setelahnya, kita mengisi ```struct``` tersebut dengan pointer dari fungsi yang ingin diimplementasikan. 
 
 Kebanyakan fungsi-fungsi yang tersedia adalah **opsional**, kita tidak perlu mengimplementasikan semuanya. Beberapa fungsi memang harus diimplementasikan dalam _file system_. Fungsi-fungsi tersebut antara lain:
 - Fungsi ```getattr``` yang dipanggil saat sistem mencoba untuk mendapatkan atribut dari sebuah file.
@@ -286,7 +286,7 @@ Lalu buat sebuah direktori sebagai tujuan pembuatan FUSE dan menjalankan FUSE pa
 $ mkdir [direktori tujuan]
 $ ./[output] [direktori tujuan]
 ```
-Setelah program dijalankan, masuklah kedalam direktori tujuan tersebut. Isi dari direktori tersebut adalah list folder yang sama seperti yang ada di dalam ```root``` atau ```/```
+Setelah program dijalankan, masuklah kedalam direktori tujuan tersebut. Isi dari direktori tersebut adalah list folder yang sama seperti yang ada di dalam ```root``` atau ```/```.
 
 Sesuai dengan penjelasan di awal di mana FUSE dapat memodifikasi _file system_ di _user space_ tanpa perlu mengubah kode yang ada pada kernel, di sini kita coba memodifikasi kode FUSE tadi agar FUSE tersebut menampilkan apa yang ada di dalam folder ```/home/[user]/Documents```.
 Ubah kode FUSE tadi seperti yang ada dibawah ini:
