@@ -77,15 +77,15 @@ Inode adalah abstraksi VFS untuk berkas. Setiap berkas, _directory_, dan data la
 - _File System Specific Information_: Menunjukkan informasi khusus yang dibutuhkan oleh suatu inode.
 
 # 2. File System in Userspace (FUSE)
-FUSE (Filesystem in Userspace) adalah sebuah _interface_ dimana kita dapat membuat _file system_ linux sendiri pada _user space_.
+FUSE (Filesystem in Userspace) adalah sebuah _interface_ dimana kita dapat membuat _file system_ sendiri pada _userspace_ pada linux.
 
-Keuntungan menggunakan FUSE ialah, kita dapat menggunakan _library_ apapun yang tersedia untuk membuat _file system_ sendiri tanpa perlu mengganti kode pada kernel tanpa perlu mengenali secara mendalam apa yang _file system_ sebenarnya lakukan di _kernel space_. Hal ini dilakukan karenanya modul fuse yang dapat menjembatani antara akode _file system_ yang berada pada _user space_ dengan _file system_ yang berada pada _kernel space_
+Keuntungan menggunakan FUSE ialah, kita dapat menggunakan _library_ apapun yang tersedia untuk membuat _file system_ sendiri tanpa perlu mengenali secara mendalam apa yang _file system_ sebenarnya lakukan di _kernel space_. Hal ini dilakukan karena modul fuse yang dapat menjembatani antara kode _file system_ yang berada pada _userspace_ dengan _file system_ yang berada pada _kernel space_.
 
-Salah satu contoh yang menarik dari fuse adalah [GDFS][7bb7b7cc] (Google Drive File System) dimana GDFS ini memungkinkan kita untuk menunggangkan (mount) Google Drive kita ke sistem linux dan menggunakannya seperti file linux biasa.
+Salah satu contoh yang menarik dari FUSE adalah [GDFS][7bb7b7cc] (Google Drive File System), dimana GDFS ini memungkinkan kita untuk me-_mount Google Drive_ kita ke sistem linux dan menggunakannya seperti file linux biasa.
 
   [7bb7b7cc]: https://github.com/robin-thomas/GDFS "GDFS"
 
-Untuk mengimplementasikan FUSE ini, kita harus membuat sebuah program yang terhubung dengan *library* ```libfuse```. Tujuan dari program yang dibuat ini adalah menspesifikkan bagaimana *file system* merespon *read/write/stat* dari sebuah *request*. Program ini juga digunakan untuk menautkan *(mount)* *file system* asli *(kernelspace)* ke *filesystem* yang baru *(userspace)*. Jadi di saat *user* berurusan dengan *read/write/stat request* di *filesystem (userspace)*, kernel akan meneruskan *input output request* tersebut ke program FUSE dan program tersebut akan merespon kembali ke *user*.
+Untuk mengimplementasikan FUSE ini, kita harus membuat sebuah program yang terhubung dengan *library* ```libfuse```. Tujuan dari program yang dibuat ini adalah menspesifikkan bagaimana *file system* merespon *read/write/stat* dari sebuah *request*. Program ini juga digunakan untuk me-*(mount)* *file system* asli *(kernel space)* ke *file system* yang baru *(userspace)*. Jadi di saat *user* berurusan dengan *read/write/stat request* di *filesystem (userspace)*, kernel akan meneruskan *input output request* tersebut ke program FUSE dan program tersebut akan merespon kembali ke *user*.
 
 Untuk lebih jelasnya mari kita coba membuat program FUSE.
 
@@ -288,7 +288,7 @@ $ ./[output] [direktori tujuan]
 ```
 Setelah program dijalankan, masuklah kedalam direktori tujuan tersebut. Isi dari direktori tersebut adalah list folder yang sama seperti yang ada di dalam ```root``` atau ```/```.
 
-Sesuai dengan penjelasan di awal di mana FUSE dapat memodifikasi _file system_ di _user space_ tanpa perlu mengubah kode yang ada pada kernel, di sini kita coba memodifikasi kode FUSE tadi agar FUSE tersebut menampilkan apa yang ada di dalam folder ```/home/[user]/Documents```.
+Sesuai dengan penjelasan di awal di mana FUSE dapat memodifikasi _file system_ di _userspace_ tanpa perlu mengubah kode yang ada pada kernel, di sini kita coba memodifikasi kode FUSE tadi agar FUSE tersebut menampilkan apa yang ada di dalam folder ```/home/[user]/Documents```.
 Ubah kode FUSE tadi seperti yang ada dibawah ini:
 
 ```c
