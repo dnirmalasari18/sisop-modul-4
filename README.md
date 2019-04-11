@@ -81,6 +81,8 @@ FUSE (Filesystem in Userspace) adalah sebuah _interface_ dimana kita dapat membu
 
 Keuntungan menggunakan FUSE ialah kita dapat menggunakan _library_ apapun yang tersedia untuk membuat _file system_ sendiri tanpa perlu mengenali secara mendalam apa yang _file system_ sebenarnya lakukan di _kernel space_. Hal ini dilakukan karena modul FUSE yang dapat menjembatani antara kode _file system_ yang berada pada _userspace_ dengan _file system_ yang berada pada _kernel space_.
 
+![FUSE](img/fuse.png)
+#
 Salah satu contoh yang menarik dari FUSE adalah [GDFS][7bb7b7cc] (Google Drive File System), dimana GDFS ini memungkinkan kita untuk me-_mount Google Drive_ kita ke sistem linux dan menggunakannya seperti file linux biasa.
 
   [7bb7b7cc]: https://github.com/robin-thomas/GDFS "GDFS"
